@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/OSTrails/FAIRsharing_DCAT_Proxy:
+      branch: main
+      repo: https://github.com/OSTrails/FAIRsharing_DCAT_Proxy.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/OSTrails/FAIRsharing_DCAT_Proxy git:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-copper-yak.sh
+        container: qc.acc_lumpy-vermilion-fossa
+  QC.Doc:
+    repos:
+      github.com/OSTrails/FAIRsharing_DCAT_Proxy find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.skimpy-smalt-akbash.sh
+        container: qc.doc_whiny-brown-chamois
+      github.com/OSTrails/FAIRsharing_DCAT_Proxy git:
+        commands:
+        - /usr/bin/env sh .sqa/script.pokey-firebrick-flamingo.sh
+        container: qc.doc_cranky-persimmon-shark
+      github.com/OSTrails/FAIRsharing_DCAT_Proxy markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.flaky-cerulean-chinchilla.sh
+        container: qc.doc_hazy-silver-iguana
+  QC.Lic:
+    repos:
+      github.com/OSTrails/FAIRsharing_DCAT_Proxy licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-bistre-chinook.sh
+        container: qc.lic_hilly-chocolate-owl
+  QC.Sty:
+    repos:
+      github.com/OSTrails/FAIRsharing_DCAT_Proxy hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-amber-newfoundland.sh
+        container: qc.sty_muggy-bistre-hamster
+      github.com/OSTrails/FAIRsharing_DCAT_Proxy rubocop:
+        commands:
+        - /usr/bin/env sh .sqa/script.messy-black-wolf.sh
+        container: qc.sty_muzzy-cornflower-echidna
+  QC.Ver:
+    repos:
+      github.com/OSTrails/FAIRsharing_DCAT_Proxy get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.hilly-bronze-squirt.sh
+        container: qc.ver_zippy-mustard-bongo
+timeout: 5400
